@@ -20,7 +20,7 @@ return new class extends Migration
 			$table->string('phone')->unique();
 			$table->double('salary')->nullable();
             $table->string('password');
-            $table->string('role');// admin ,user
+            $table->string('role');// admin ,employee, manger
             $table->bigInteger('manger_id')->unsigned()->nullable();
             $table->bigInteger('department_id')->unsigned()->nullable();
             $table->rememberToken();

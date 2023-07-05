@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateDepartmentsTable extends Migration {
 
@@ -9,8 +10,9 @@ class CreateDepartmentsTable extends Migration {
 	{
 		Schema::create('departments', function(Blueprint $table) {
 			$table->id('id');
-			$table->string('name')->unique();
-			$table->text('name')->nullable();
+			$table->string('name');
+			$table->string('slug')->unique();
+			$table->text('description')->nullable();
 			$table->timestamps();
 		});
 	}

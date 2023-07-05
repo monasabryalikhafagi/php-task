@@ -17,18 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login',"" );
-Route::group(['perfix' => 'admin', 'middleware' => []],function(){
+Route::get('/login', '\App\Http\Controllers\AuthController@getLogin')->name('login');
+Route::post('/login','\App\Http\Controllers\AuthController@postLogin' )->name('login');
+
+
+
+Route::group([ 'middleware' => ['auth'],'namespace'=>'App\Http\Controllers' ],function(){
+    Route::get('/dashboard','DashboardController@index')->name('dashboard');
+    Route::group(['middleware' =>['isAdmin']],function(){
+        Route::resource('employees','EmployeeController');
+        Route::resource('departments','DepartmentController');
+    
+    });
 
 });
 
-Route::group(['perfix' => 'admin', 'middleware' => ['auth','isAdmin']],function(){
-    Route::resource('employees','EmployeeController');
-    Route::resource('departments','DepartmentController');
-
-});
-Route::group(['perfix' => 'dashbord', 'middleware' => ['auth','isAdmin']],function(){
-    Route::resource('employees','EmployeeController');
-    Route::resource('departments','DepartmentController');
-
-});
