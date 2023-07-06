@@ -30,5 +30,14 @@ Route::group([ 'middleware' => ['auth'],'namespace'=>'App\Http\Controllers' ],fu
     
     });
 
+    Route::resource('tasks','TaskController');
+
+    Route::get('tasks/assign-tasks','TaskController@getEmployeeTasks');
+    Route::get('tasks/assign-tasks/{id}','TaskController@showTask');
+    Route::post('tasks/assign-tasks/{id}','TaskController@submitTask');
+
+
+    
+
 });
 

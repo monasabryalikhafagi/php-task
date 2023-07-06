@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 
 @section('page')
-{{dd(auth()->user())}}
 <div class="container-fluid page-body-wrapper">
     <!-- partial:partials/_sidebar.html -->
     <nav class="sidebar sidebar-offcanvas" id="sidebar">

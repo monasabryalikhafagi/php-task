@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Task;
 class TaskController extends Controller 
 {
 
@@ -14,7 +14,9 @@ class TaskController extends Controller
    */
   public function index()
   {
-    
+    $user = auth()->user();
+    Task::when( $user->role == "manger" ,fn($q) => $q->where('manger_id',$user->id) )->when( $user->role == "manger" ,fn($q) => $q->where('manger_id',$user->id) )->paginate();
+    return view('tasks.index');
   }
 
   /**
@@ -24,7 +26,6 @@ class TaskController extends Controller
    */
   public function create()
   {
-    
   }
 
   /**
@@ -34,6 +35,7 @@ class TaskController extends Controller
    */
   public function store(Request $request)
   {
+    //like departemnet will append manger_id with current user id 
     
   }
 

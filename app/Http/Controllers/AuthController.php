@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\PostLoginRequest;
 class AuthController extends Controller
 {
 
@@ -17,7 +17,7 @@ class AuthController extends Controller
   {
     return view('auth.login');
   }
-  public function postLogin(Request $request)
+  public function postLogin(PostLoginRequest $request)
   {
     if (is_numeric($request->get('email'))) {
 

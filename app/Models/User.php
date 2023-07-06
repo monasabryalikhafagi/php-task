@@ -31,6 +31,7 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $appends = ['full_name'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -41,7 +42,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    //protected $appends = ['full_name'];
     /**
      * The attributes that should be cast.
      *
@@ -55,19 +55,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Department::class);
     }
-    // public function getFullNameAttribute()
-    
-    // {
-    //    return $this->first_name .' '. $this->last_name;
-    
-    // }
+
     protected function fullName(): Attribute
     {
-        return Attribute::make(
+        return new Attribute(
             get: fn () => $this->first_name .' '. $this->last_name ,
         );
     }
-
+ 
     public function manger(): BelongsTo
     {
         return $this->belongsTo($this);
@@ -75,5 +70,15 @@ class User extends Authenticatable
     public function employess(): HasMany
     {
         return $this->hasMany($this, 'manger_id');
+    }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class, 'manger_id');
+    }
+
+    public function assignTasks(): HasMany
+    {
+        return $this->hasMany(Task::class, 'employee_id');
     }
 }
